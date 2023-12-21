@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         required:[true, 'password is required']
     }
 })
-
+/**Before saving a user document, hash the entered password for security */
 userSchema.pre("save", async function(next){
 
     if(!this.isModified('password')){

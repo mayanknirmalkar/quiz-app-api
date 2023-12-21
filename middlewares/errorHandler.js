@@ -1,6 +1,6 @@
 const errorHandler = (err,req,res,next) =>{
-
-    if(err.name === "ZodError"){
+    
+    if(err.name === "ZodError" || err.name ==="ValidationError"){
         res.status(err.statusCode || 411).json({
             message:"Please enter valid inputs"
         })

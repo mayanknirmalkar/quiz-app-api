@@ -4,6 +4,10 @@ import expressAsyncHandler from "express-async-handler";
 
 import mongoose from "mongoose";
 
+/**
+ * In each of the below given middlewares, we are first creating a schema of the expected input and then using the zod function parse validating if the input matches the schema created. If it doesn't match the schema it throws zoderror which is a validation error
+ */
+
 export const createQuizValidate = expressAsyncHandler((req, res, next) =>{
 
 
