@@ -1,0 +1,23 @@
+import Quiz from "../models/quiz.js";
+
+import asyncHandler from "express-async-handler";
+
+
+const getQuiz = asyncHandler(async (req,res) => {
+    
+    const quizes = await Quiz.find({status:"active"});
+
+    if(!quizes){
+        return res.status(400).json({
+            quizes,
+            message:"no quizes here"
+        })
+    }
+
+    return res.status(200).json({
+        quizes,
+        message:"retrieved active quizes"
+    })
+})
+
+export default getQuiz;
