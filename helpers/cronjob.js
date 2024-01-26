@@ -45,7 +45,7 @@ const updateQuizStatuses = expressAsyncHandler(
             await quiz.save();
         });
 
-        /**Make the quiz inactive an release the result*/
+        /**Make the quiz inactive and release the result*/
         const quizesToInactive = await Quiz.find({
             status:"finished",
             $expr:{

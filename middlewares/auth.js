@@ -11,7 +11,7 @@ const auth = asyncHandler(async (req,res,next) =>{
 
     const token = req.headers.authorization.split(" ")[1];
 
-    const payload = jwt.verify(token, process.env.SECRET);
+    const payload = jwt.verify(token, "secret");
     /**If token is malformed */
     if(!payload){
         return res.status(403).json({message:"login again, jwt malformed"})
