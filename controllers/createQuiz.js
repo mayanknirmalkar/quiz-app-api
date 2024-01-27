@@ -4,6 +4,7 @@ import Quiz from "../models/quiz.js";
 
 const createQuiz = asyncHandler( async(req,res) =>{
 
+
         let {question, rightAnswer, options, startDate, endDate} = req.body;
 
         const quizExists = await Quiz.findOne({question});

@@ -2,7 +2,11 @@ import express from "express";
 
 import createQuiz from "../controllers/createQuiz.js";
 
+import attemptQuiz from "../controllers/attempQuiz.js";
+
 import auth from "../middlewares/auth.js";
+
+import verifyUser from "../controllers/verifyUser.js";
 
 import register from "../controllers/register.js";
 
@@ -27,7 +31,11 @@ router.post("/login", loginValidate, login)
 
 /**Secure routes */
 
+router.get("/", auth, verifyUser );
+
 router.post("/quizzes", [auth, createQuizValidate], createQuiz)
+
+router.post("/quizzes/attempt/:id", auth, attemptQuiz)
 
 router.get("/quizzes/active", auth, getQuiz)
 

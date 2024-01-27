@@ -4,6 +4,8 @@ import expressAsyncHandler from "express-async-handler";
 
 import mongoose from "mongoose";
 
+import formatDateToISOString from "../helpers/dateFormatter.js";
+
 /**
  * In each of the below given middlewares, we are first creating a schema of the expected input and then using the zod function parse validating if the input matches the schema created. If it doesn't match the schema it throws zoderror which is a validation error
  */
@@ -13,12 +15,24 @@ export const createQuizValidate = expressAsyncHandler((req, res, next) =>{
 
     let {question, options, rightAnswer, startDate, endDate} = req.body;
         
+        startDate = new Date(startDate)
+        endDate = new Date(endDate)
+
+        
+          
+          
+          
+          startDate = formatDateToISOString(startDate).toString();
+          endDate = formatDateToISOString(endDate).toString();
+          
+
+        
     
         const questionSchema = z.string().regex(/^[a-zA-Z0-9\s.,!?'"()]*$/);
         const optionsSchema = z.array(z.string());
         const rightAnswerSchema = z.number();
-        const startDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
-        const endDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
+        const startDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/);
+        const endDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/);
     
 
         questionSchema.parse(question);
