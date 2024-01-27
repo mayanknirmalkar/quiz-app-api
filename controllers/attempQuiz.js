@@ -20,6 +20,8 @@ const attemptQuiz = asyncHandler( async(req,res) => {
 
     const result = answer == quiz.rightAnswer ? "correct" : "incorrect";
 
+    quiz.result = result;
+
     await quiz.save();
 
     res.status(200).json({
